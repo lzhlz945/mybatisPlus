@@ -1,0 +1,9 @@
+1、配置上mp:
+   只需要把SqlSessionFactoryBean改成MybatisSqlSessionFactoryBean；
+
+2、执行一次增加操作要
+     建立接口实现BaseMapper
+    * @TableId:
+   	 * 	 value: 指定表中的主键列的列名， 如果实体属性名与列名一致，可以省略不指定.
+   	 *   type: 指定主键策略.
+   	 @TableName(vale="数据库中的表名")
