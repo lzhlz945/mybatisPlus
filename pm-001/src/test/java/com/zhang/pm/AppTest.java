@@ -11,6 +11,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Unit test for simple App.
@@ -42,10 +44,16 @@ public class AppTest {
         employee.setEmail("zs@qq.com");
         employee.setGender(1);
         employee.setLastName("zhang");
-        employeeMapper.insert(employee);
-        Integer id = employee.getId();
-
-        System.out.println(id);
+        //employeeMapper.insert(employee);
+        //Integer id = employee.getId();
+        List<Integer> list=new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        List<Employee> employees = employeeMapper.selectBatchIds(list);
+        for (Employee employee1 : employees) {
+            System.out.println(employee1);
+        }
 
 
     }

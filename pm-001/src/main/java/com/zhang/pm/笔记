@@ -20,3 +20,12 @@
     	private Double salary ; 这样可以忽略
      pm中直接把插入的对象封装到了实体bean中
      以前：useGeneratedKeys="true" keyProperty="id"
+
+5、查询批量id与mybatis的区别(in)
+    mybatis:
+    select * from tbl_employee where id in
+           <foreach collection="list" item="ee" open="(" close=")" separator=",">
+               #{ee}
+           </foreach>
+    mp:
+    List<Employee> employees = employeeMapper.selectBatchIds(list);
