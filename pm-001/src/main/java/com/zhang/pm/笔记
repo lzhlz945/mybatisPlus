@@ -29,3 +29,34 @@
            </foreach>
     mp:
     List<Employee> employees = employeeMapper.selectBatchIds(list);
+6、pm执行原理：
+   sqlSessionFactory---configuration(保存了所有mybatis的配置)---MappedStatement(mapper中的每条sql语句)
+
+   Configuration： MyBatis 或者 MP 全局配置对象
+   MappedStatement：一个 MappedStatement 对象对应 Mapper 配置文件中的一个
+   select/update/insert/delete 节点，主要描述的是一条 SQL 语句
+   SqlMethod : 枚举对象 ，MP 支持的 SQL 方法
+   TableInfo：数据库表反射信息 ，可以获取到数据库表相关的信息
+   SqlSource: SQL 语句处理对象
+   MapperBuilderAssistant： 用于缓存、SQL 参数、查询方剂结果集处理等.
+   通过 MapperBuilderAssistant 将每一个 mappedStatement
+   添加到 configuration 中的 mappedStatements 中
+
+
+    sql自动注射：AutoSqlInjector
+    protected void injectDeleteByIdSql(boolean batch, Class<?> mapperClass, Class<?> modelClass, TableInfo table) {
+           SqlMethod sqlMethod = SqlMethod.DELETE_BY_ID;
+           String idStr = table.getKeyProperty();
+           if (batch) {
+               sqlMethod = SqlMethod.DELETE_BATCH_BY_IDS;
+               StringBuilder ids = new StringBuilder();
+               ids.append("\n<foreach item=\"item\" index=\"index\" collection=\"coll\" separator=\",\">");
+               ids.append("#{item}");
+               ids.append("\n</foreach>");
+               idStr = ids.toString();
+           }
+
+           String sql = String.format(sqlMethod.getSql(), table.getTableName(), table.getKeyColumn(), idStr);
+           SqlSource sqlSource = this.languageDriver.createSqlSource(this.configuration, sql, modelClass);
+           this.addDeleteMappedStatement(mapperClass, sqlMethod.getMethod(), sqlSource);
+       }
