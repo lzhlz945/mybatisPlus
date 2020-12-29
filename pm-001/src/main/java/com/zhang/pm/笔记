@@ -7,3 +7,10 @@
    	 * 	 value: 指定表中的主键列的列名， 如果实体属性名与列名一致，可以省略不指定.
    	 *   type: 指定主键策略.
    	 @TableName(vale="数据库中的表名")
+
+3、配置全局的mp在spring中
+   创建全局bean：globalConfiguration
+   把这个引入ref到MybatisSqlSessionFactoryBean中
+        <property name="dbColumnUnderline" value="true"/>
+        <property name="idType" value="0"/>
+        <property name="tablePrefix" value="tbl_"/>

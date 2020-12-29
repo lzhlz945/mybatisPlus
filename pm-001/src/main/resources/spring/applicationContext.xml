@@ -29,16 +29,27 @@
 <tx:annotation-driven transaction-manager="dataSourceTransactionManager"/>
         <!-- 配置 SqlSessionFactoryBean -->
 <bean id="sqlSessionFactoryBean" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
-<!-- 数据源 -->
+
+        <!-- 数据源 -->
 <property name="dataSource" ref="dataSource"></property>
+        <!--导入mybatis的类路径-->
 <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+        <!--注入mp的全局配置生效-->
+<property name="globalConfig" ref="globalConfiguration"/>
 
 </bean>
-        <!--
-        配置 mybatis 扫描 mapper 接口的路径
-        -->
+        <!--  配置 mybatis 扫描 mapper 接口的路径-->
 <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-<property name="basePackage"
-          value="com.zhang.pm.mapper"></property>
+<property name="basePackage" value="com.zhang.pm.mapper"></property>
 </bean>
-        </beans>
+
+        <!--mp的全局配置-->
+<bean class="com.baomidou.mybatisplus.entity.GlobalConfiguration" name="globalConfiguration">
+
+                <property name="dbColumnUnderline" value="true"/>
+                <property name="idType" value="0"/>
+                <property name="tablePrefix" value="tbl_"/>
+
+</bean>
+
+</beans>

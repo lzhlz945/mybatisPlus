@@ -43,6 +43,9 @@ public class AppTest {
         employee.setGender(1);
         employee.setLastName("zhang");
         employeeMapper.insert(employee);
+        Integer id = employee.getId();
+
+        System.out.println(id);
 
 
     }
