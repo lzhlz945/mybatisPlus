@@ -1,6 +1,7 @@
 package com.zhang.pm.beans;
 
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -35,7 +36,7 @@ public class Employee {
 	private Integer gender; 
 	private Integer age ;
 	
-
+    @TableField(exist = false)
 	private Double salary ; 
 	
 	public Double getSalary() {

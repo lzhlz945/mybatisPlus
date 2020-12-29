@@ -14,3 +14,9 @@
         <property name="dbColumnUnderline" value="true"/>
         <property name="idType" value="0"/>
         <property name="tablePrefix" value="tbl_"/>
+
+4、新增字段和返回主键值
+     @TableField(exist = false)
+    	private Double salary ; 这样可以忽略
+     pm中直接把插入的对象封装到了实体bean中
+     以前：useGeneratedKeys="true" keyProperty="id"
