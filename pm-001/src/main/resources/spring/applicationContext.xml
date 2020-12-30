@@ -45,7 +45,6 @@
 
         <!--mp的全局配置-->
 <bean class="com.baomidou.mybatisplus.core.config.GlobalConfig" name="globalConfiguration">
-
     <property name="dbConfig">
         <bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig$DbConfig">
             <!--声明全局默认类名的对应的表的前缀-->
@@ -54,9 +53,6 @@
             <property name="idType" value="AUTO"></property>
         </bean>
     </property>
-
-
-
 </bean>
 
 </beans>

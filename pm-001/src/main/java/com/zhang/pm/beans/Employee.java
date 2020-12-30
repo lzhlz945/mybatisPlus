@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+
+import java.io.Serializable;
 
 /**
  * javaBean
@@ -21,7 +24,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * 
  */
 //@TableName(value="tbl_employee")
-public class Employee {
+public class Employee extends Model<Employee> {
 	/*
 	 * @TableId:
 	 * 	 value: 指定表中的主键列的列名， 如果实体属性名与列名一致，可以省略不指定. 
@@ -79,7 +82,10 @@ public class Employee {
 	public String toString() {
 		return "Employee [id=" + id + ", lastName=" + lastName + ", email=" + email + ", gender=" + gender + ", age="
 				+ age + "]";
-	} 
-	
-	
+	}
+
+	@Override
+	protected Serializable pkVal() {
+		return id;
+	}
 }

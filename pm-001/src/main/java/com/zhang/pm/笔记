@@ -71,3 +71,23 @@
 
       orderBy和last(last总是最后执行可以类似于拼接字符串)
       .orderBy("age").last("asc limit 1,3")
+
+      跟新后：UpdateWrapper 、QueryWrapper
+      配置文件：         <!--mp的全局配置-->
+            <bean class="com.baomidou.mybatisplus.core.config.GlobalConfig" name="globalConfiguration">
+                <property name="dbConfig">
+                    <bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig$DbConfig">
+                        <!--声明全局默认类名的对应的表的前缀-->
+                        <property name="tablePrefix" value="tbl_"></property>
+                        <!--配置全局主键自增-->
+                        <property name="idType" value="AUTO"></property>
+                    </bean>
+                </property>
+            </bean>
+
+8、activityRecord:
+    bean继承Model<xx>
+    重写 @Override
+       	protected Serializable pkVal() {
+       		return id;
+       	}
