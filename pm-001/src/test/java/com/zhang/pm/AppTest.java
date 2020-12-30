@@ -1,9 +1,9 @@
 package com.zhang.pm;
 
-import static org.junit.Assert.assertTrue;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zhang.pm.beans.Employee;
 import com.zhang.pm.mapper.EmployeeMapper;
 import org.junit.Test;
@@ -64,31 +64,18 @@ public class AppTest {
      */
     @Test
     public void testEntityWrapper(){
-        List<Employee> employeeList = employeeMapper.selectPage(new Page<Employee>(1, 2), new EntityWrapper<Employee>()
-                .between("age", 18, 50).eq("last_name", "zhang")
-                .eq("gender", 1));
-        for (Employee employee : employeeList) {
-            System.out.println(employee);
-        }
+        QueryWrapper<Employee> queryWrapper=new QueryWrapper<Employee>();
 
+        Page<Employee> employeePage = employeeMapper.selectPage(new Page<Employee>(1, 2), queryWrapper.eq("last_name", "zhang"));
+        System.out.println(employeePage);
     }
     /**
      * 测试EntityWrapper2条件构造器
      */
     @Test
     public void testEntityWrapper1(){
-        Employee employee=new Employee();
-        employee.setAge(18);
-        employee.setEmail("zs@qq.com");
-        employee.setGender(1);
-        employee.setLastName("zhang");
-        //employeeMapper.insert(employee);
-        //Integer id = employee.getId();
-        List<Integer> list=new ArrayList<>();
-        list.add(5);
-        list.add(6);
-        list.add(7);
-        List<Employee> selectList = employeeMapper.selectList(new EntityWrapper<Employee>().eq("last_name", "zhang"));
+        QueryWrapper<Employee> queryWrapper=new QueryWrapper<Employee>();
+        List<Employee> selectList = employeeMapper.selectList(queryWrapper.eq("last_name", "zhang"));
         for (Employee employee1 : selectList) {
             System.out.println(employee1);
         }
@@ -100,11 +87,11 @@ public class AppTest {
      */
     @Test
     public void testEntityWrapperAndOr(){
-
-        List<Employee> selectList = employeeMapper.selectList(new EntityWrapper<Employee>().eq("last_name", "zhang")
+        QueryWrapper<Employee> queryWrapper=new QueryWrapper<Employee>();
+        List<Employee> selectList = employeeMapper.selectList(queryWrapper.eq("last_name", "zhang")
                                                                 .like("email","l")
                                                                 //.or()  //(last_name = ? AND email LIKE ? OR email LIKE ?)
-                                                                .orNew() //(last_name = ? AND email LIKE ?) OR (email LIKE ?)
+                                                                .or()//(last_name = ? AND email LIKE ?) OR (email LIKE ?)
                                                                 .like("email","z"));
         for (Employee employee1 : selectList) {
             System.out.println(employee1);
@@ -117,14 +104,55 @@ public class AppTest {
      */
     @Test
     public void testEntityWrapperAndOderByAndLast(){
-
-        List<Employee> employees = employeeMapper.selectList(new EntityWrapper<Employee>()
-                                                                    .orderBy("age").last("asc limit 1,3")
+        QueryWrapper<Employee> queryWrapper=new QueryWrapper<Employee>();
+        List<Employee> employees = employeeMapper.selectList(queryWrapper.orderBy(false,true,"age").last("limit 1,3")
                                                                 );
         for (Employee employee1 : employees) {
             System.out.println(employee1);
         }
 
+    }
+
+    /**
+     * 测试EntityWrapper条件构造器
+     * orderBy和last()测试
+     */
+    @Test
+    public void testEntityCondition(){
+        UpdateWrapper<Employee> updateWrapper=new UpdateWrapper<>();
+        Employee employee=new Employee();
+        employee.setAge(1222);
+        employee.setEmail("zs@qq.com");
+        employee.setGender(0);
+        employee.setLastName("zhang");
+        int employees = employeeMapper.update(employee,updateWrapper.eq("id","1"));
+
+
+    }
+
+    /**
+     * 测试EntityWrapper条件构造器
+     * 自定义sql使用wrapper
+     */
+    @Test
+    public void testCustomizeSql(){
+        QueryWrapper<Employee> queryWrapper=new QueryWrapper<Employee>();
+        List<Employee> all = employeeMapper.getAll(queryWrapper.eq("last_name", "zhang"));
+        for (Employee employee : all) {
+
+            System.out.println(employee);
+        }
+    }
+
+    /**
+     * 测试EntityWrapper条件构造器
+     * 自定义sql使用wrapper
+     */
+    @Test
+    public void testCustomizeSql1(){
+        QueryWrapper<Employee> queryWrapper=new QueryWrapper<Employee>();
+
+        int id = employeeMapper.delete(queryWrapper.eq("id", 1));
     }
 
 }
