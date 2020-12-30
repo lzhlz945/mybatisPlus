@@ -94,5 +94,22 @@ public class AppTest {
         }
 
     }
+    /**
+     * 测试EntityWrapper条件构造器
+     * 测试or()和 orNew()
+     */
+    @Test
+    public void testEntityWrapperAndOr(){
+
+        List<Employee> selectList = employeeMapper.selectList(new EntityWrapper<Employee>().eq("last_name", "zhang")
+                                                                .like("email","l")
+                                                                //.or()  //(last_name = ? AND email LIKE ? OR email LIKE ?)
+                                                                .orNew() //(last_name = ? AND email LIKE ?) OR (email LIKE ?)
+                                                                .like("email","z"));
+        for (Employee employee1 : selectList) {
+            System.out.println(employee1);
+        }
+
+    }
 
 }

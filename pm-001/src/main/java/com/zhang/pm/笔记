@@ -65,4 +65,6 @@
       selectPage(new Page<Employee>(1, 2), new EntityWrapper<Employee>()
                       .between("age", 18, 50).eq("last_name", "zhang")
                       .eq("gender", 1));
-
+      .or()和orNew()的区别
+      .or()  //(last_name = ? AND email LIKE ? OR email LIKE ?)
+      .orNew() //(last_name = ? AND email LIKE ?) OR (email LIKE ?)
