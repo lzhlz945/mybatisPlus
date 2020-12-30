@@ -68,3 +68,6 @@
       .or()和orNew()的区别
       .or()  //(last_name = ? AND email LIKE ? OR email LIKE ?)
       .orNew() //(last_name = ? AND email LIKE ?) OR (email LIKE ?)
+
+      orderBy和last(last总是最后执行可以类似于拼接字符串)
+      .orderBy("age").last("asc limit 1,3")

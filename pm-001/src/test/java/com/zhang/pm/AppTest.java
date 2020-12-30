@@ -111,5 +111,20 @@ public class AppTest {
         }
 
     }
+    /**
+     * 测试EntityWrapper条件构造器
+     * orderBy和last()测试
+     */
+    @Test
+    public void testEntityWrapperAndOderByAndLast(){
+
+        List<Employee> employees = employeeMapper.selectList(new EntityWrapper<Employee>()
+                                                                    .orderBy("age").last("asc limit 1,3")
+                                                                );
+        for (Employee employee1 : employees) {
+            System.out.println(employee1);
+        }
+
+    }
 
 }
