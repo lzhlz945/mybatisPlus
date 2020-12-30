@@ -60,3 +60,9 @@
            SqlSource sqlSource = this.languageDriver.createSqlSource(this.configuration, sql, modelClass);
            this.addDeleteMappedStatement(mapperClass, sqlMethod.getMethod(), sqlSource);
        }
+
+7、条件选择器：EntityWrapper
+      selectPage(new Page<Employee>(1, 2), new EntityWrapper<Employee>()
+                      .between("age", 18, 50).eq("last_name", "zhang")
+                      .eq("gender", 1));
+
