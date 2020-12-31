@@ -1,13 +1,15 @@
-package com.zhang.pm;
+package com.zhang.mp;
+
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zhang.pm.beans.Employee;
+import com.zhang.mp.beans.Employee;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
+
 
 /**
  * @author: create by zhl
@@ -26,7 +28,6 @@ public class Test01 {
         Employee employee=new Employee();
         employee.setAge(18);
         employee.setEmail("zs@qq.com");
-        employee.setGender(1);
         employee.setLastName("zhang");
         boolean insert = employee.insert();
         System.out.println(insert);

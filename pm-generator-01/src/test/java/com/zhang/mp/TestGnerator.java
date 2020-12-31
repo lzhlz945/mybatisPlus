@@ -8,7 +8,10 @@ import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
+import com.zhang.mp.beans.Employee;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
@@ -19,6 +22,8 @@ import java.util.List;
  * @date:2020/12/30
  */
 public class TestGnerator {
+//    private ApplicationContext context=new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+
     @Test
     public void test(){
 
@@ -69,7 +74,7 @@ public class TestGnerator {
 
     }
 
-   /* @Test
+    @Test
     public void test01(){
 
         Employee employee = new Employee();
@@ -78,5 +83,5 @@ public class TestGnerator {
             System.out.println(employee1);
         }
 
-    }*/
+    }
 }
