@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="pm-001" />
         <module name="pm-generator" />
+        <module name="pm-generator-01" />
         <module name="test-001" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
       <module name="pm-001" target="1.8" />
       <module name="pm-002" target="1.8" />
       <module name="pm-generator" target="1.8" />
+      <module name="pm-generator-01" target="1.8" />
       <module name="test-001" target="1.8" />
     </bytecodeTargetLevel>
   </component>
