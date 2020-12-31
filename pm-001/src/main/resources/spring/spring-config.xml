@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring
+        http://mybatis.org/schema/mybatis-spring-1.2.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+        <!-- 数据源 -->
+        <context:property-placeholder location="classpath:properties/jdbc.properties"/>
+        <bean id="dataSource"
+              class="com.mchange.v2.c3p0.ComboPooledDataSource">
+                <property name="driverClass" value="${driverClassName}"></property>
+                <property name="jdbcUrl" value="${url}"></property>
+                <property name="user" value="${user}"></property>
+                <property name="password" value="${password}"></property>
+        </bean>
+        <!-- 事务管理器 -->
+        <bean id="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+                <property name="dataSource" ref="dataSource"></property>
+        </bean>
+        <!-- 基于注解的事务管理 -->
+        <tx:annotation-driven transaction-manager="dataSourceTransactionManager"/>
+        <!-- 配置 SqlSessionFactoryBean -->
+        <bean id="sqlSessionFactoryBean" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
+
+                <!-- 数据源 -->
+                <property name="dataSource" ref="dataSource"></property>
+                <!--导入mybatis的类路径-->
+                <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+                <!--注入mp的全局配置生效-->
+                <property name="globalConfig" ref="globalConfiguration"/>
+                <property name="plugins">
+                        <array>
+                                <ref bean="mybatisPlusInterceptor"/>
+                                <!--<bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor"/>-->
+                        </array>
+                </property>
+
+        </bean>
+        <bean id="mybatisPlusInterceptor" class="com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor">
+                <property name="interceptors">
+                        <list>
+                                <ref bean="paginationInnerInterceptor"/>
+                        </list>
+                </property>
+        </bean>
+        <bean id="paginationInnerInterceptor" class="com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor">
+                <!-- 对于单一数据库类型来说,都建议配置该值,避免每次分页都去抓取数据库类型 -->
+                <constructor-arg name="dbType" value="H2"/>
+        </bean>
+        <!--  配置 mybatis 扫描 mapper 接口的路径-->
+        <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+                <property name="basePackage" value="com.zhang.pm.mapper"></property>
+        </bean>
+
+        <!--mp的全局配置-->
+        <bean class="com.baomidou.mybatisplus.core.config.GlobalConfig" name="globalConfiguration">
+                <property name="dbConfig">
+                        <bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig$DbConfig">
+                                <!--声明全局默认类名的对应的表的前缀-->
+                                <property name="tablePrefix" value="tbl_"></property>
+                                <!--配置全局主键自增-->
+                                <property name="idType" value="AUTO"></property>
+                        </bean>
+                </property>
+        </bean>
+
+</beans>

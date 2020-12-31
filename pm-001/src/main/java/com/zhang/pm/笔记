@@ -95,14 +95,37 @@
 
 9、插件
  1 Mybatis 插件机制简介
+
   1) 插件机制: Mybatis 通过插件(Interceptor) 可以做到拦截四大对象相关方法的执行,根据需求，完
   成相关数据的动态改变。
    Executor
    StatementHandler
    ParameterHandler
    ResultSetHandler
+
   2) 插件原理
        四大对象的每个对象在创建时，都会执行 interceptorChain.pluginAll()，会经过每个插
        件对象的 plugin()方法，目的是为当前的四大对象创建代理。代理对象就可以拦截到四
        大对象相关方法的执行，因为要执行四大对象的方法需要经过代理.
+  在statementHandler的实现类中defaultHandler的构造方法中：
+        ①：会创建：parameterHandler和resultHandler
+        this.parameterHandler = this.configuration.newParameterHandler(mappedStatement, parameterObject, boundSql);
+        this.resultSetHandler = this.configuration.newResultSetHandler(executor, mappedStatement, rowBounds, this.parameterHandler, resultHandler, boundSql);
 
+
+
+        ②：在Configuration中会创建parameterHandler和resultHandler
+           interceptorChain.pluginAll(parameterHandler)访问pluginAll
+
+
+        ParameterHandler parameterHandler = mappedStatement.getLang().createParameterHandler(mappedStatement, parameterObject, boundSql);
+        parameterHandler = (ParameterHandler)this.interceptorChain.pluginAll(parameterHandler);
+            public Object pluginAll(Object target) {
+                        Interceptor interceptor;
+                        for(Iterator var2 = this.interceptors.iterator(); var2.hasNext(); target = interceptor.plugin(target)) {
+                            interceptor = (Interceptor)var2.next();
+                        }
+
+                        return target;
+                    }
+        ③：在pluginAll引入Interceptor俩遍历plugin，target = interceptor.plugin(target)来返回被代理的对象；

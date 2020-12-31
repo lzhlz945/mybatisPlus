@@ -154,5 +154,15 @@ public class AppTest {
 
         int id = employeeMapper.delete(queryWrapper.eq("id", 1));
     }
+    
+    /**
+     * testPageInfo
+     */
+    @Test
+    public void testPageInfo(){
+
+        Page<Employee> employeePage = employeeMapper.selectPage(new Page<>(1, 1), null);
+        System.out.println(employeePage.getRecords());
+    }
 
 }

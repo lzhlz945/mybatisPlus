@@ -4,6 +4,7 @@ package com.zhang.mp;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zhang.mp.beans.Employee;
+import com.zhang.mp.mapper.EmployeeMapper;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,6 +21,7 @@ import java.util.List;
 public class Test01 {
 
     private ApplicationContext context=new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+
 
 
     @Test
@@ -72,5 +74,14 @@ public class Test01 {
             System.out.println(employee1);
         }
 
+    }
+
+    @Test
+    public void testPage(){
+
+        EmployeeMapper employeeMapper = context.getBean("employeeMapper", EmployeeMapper.class);
+
+        Page<Employee> employeePage = employeeMapper.selectPage(new Page<>(1, 2), null);
+        System.out.println(employeePage.getRecords());
     }
 }
