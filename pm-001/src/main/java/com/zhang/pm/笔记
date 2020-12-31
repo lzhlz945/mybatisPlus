@@ -91,3 +91,18 @@
        	protected Serializable pkVal() {
        		return id;
        	}
+
+
+9、插件
+ 1 Mybatis 插件机制简介
+  1) 插件机制: Mybatis 通过插件(Interceptor) 可以做到拦截四大对象相关方法的执行,根据需求，完
+  成相关数据的动态改变。
+   Executor
+   StatementHandler
+   ParameterHandler
+   ResultSetHandler
+  2) 插件原理
+       四大对象的每个对象在创建时，都会执行 interceptorChain.pluginAll()，会经过每个插
+       件对象的 plugin()方法，目的是为当前的四大对象创建代理。代理对象就可以拦截到四
+       大对象相关方法的执行，因为要执行四大对象的方法需要经过代理.
+
