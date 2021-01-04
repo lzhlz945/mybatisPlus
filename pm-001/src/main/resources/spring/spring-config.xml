@@ -48,7 +48,8 @@
                 <property name="interceptors">
                         <list>
                                 <ref bean="paginationInnerInterceptor"/>
-                                <ref bean="blockAttackInnerInterceptor"/>
+                                <!--<ref bean="blockAttackInnerInterceptor"/>-->
+                                <ref bean="optimisticLockerInnerInterceptor"/>
                         </list>
                 </property>
         </bean>
@@ -60,6 +61,9 @@
         <bean id="blockAttackInnerInterceptor" class="com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor">
 
         </bean>
+        <!--乐观锁-->
+        <bean class="com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor" id="optimisticLockerInnerInterceptor"></bean>
+
         <!--  配置 mybatis 扫描 mapper 接口的路径-->
         <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
                 <property name="basePackage" value="com.zhang.pm.mapper"></property>

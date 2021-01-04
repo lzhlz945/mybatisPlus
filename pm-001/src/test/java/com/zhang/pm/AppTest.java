@@ -171,8 +171,32 @@ public class AppTest {
     @Test
     public void testZXQ(){
 
+        int delete = employeeMapper.delete(new QueryWrapper<Employee>().eq("id",44));
+        System.out.println(delete);
+
+    }
+    @Test
+    public void testZXQ1(){
+
         int delete = employeeMapper.delete(new QueryWrapper<>());
         System.out.println(delete);
+
+    }
+
+    /**
+     * 测试乐观锁
+     */
+    @Test
+    public void testLgs(){
+
+ Employee employee=new Employee();
+ employee.setId(76);
+ employee.setAge(11);
+ employee.setGender(0);
+ employee.setVersion(4);
+        int i = employeeMapper.updateById(employee);
+        System.out.println(i);
+
 
     }
 
