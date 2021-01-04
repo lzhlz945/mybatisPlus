@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/mybatisPlus.iml" filepath="$PROJECT_DIR$/.idea/mybatisPlus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pm-001/pm-001.iml" filepath="$PROJECT_DIR$/pm-001/pm-001.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pm-generator/pm-generator.iml" filepath="$PROJECT_DIR$/pm-generator/pm-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pm-generator-01/pm-generator-01.iml" filepath="$PROJECT_DIR$/pm-generator-01/pm-generator-01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pm-testBug/pm-testBug.iml" filepath="$PROJECT_DIR$/pm-testBug/pm-testBug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test-001/test-001.iml" filepath="$PROJECT_DIR$/test-001/test-001.iml" />
+    </modules>
+  </component>
+</project>
