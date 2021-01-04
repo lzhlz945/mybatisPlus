@@ -48,7 +48,7 @@
                 <property name="interceptors">
                         <list>
                                 <ref bean="paginationInnerInterceptor"/>
-                                <!--<ref bean="blockAttackInnerInterceptor"/>-->
+                                <ref bean="blockAttackInnerInterceptor"/>
                                 <ref bean="optimisticLockerInnerInterceptor"/>
                         </list>
                 </property>

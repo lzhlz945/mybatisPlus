@@ -90,7 +90,7 @@
 		配置mybatis 扫描mapper接口的路径
 	 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.atguigu.mp.mapper"></property>
+		<property name="basePackage" value="com.zhang.mp.mapper"></property>
 	</bean>
 	
 	

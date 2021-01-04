@@ -1,10 +1,14 @@
 package com.zhang.pm;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zhang.pm.beans.Employee;
+import com.zhang.pm.config.MybatisPlusConfig;
+import com.zhang.pm.mapper.EmployeeMapper;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
@@ -18,6 +22,8 @@ import java.util.List;
 public class Test01 {
 
     private ApplicationContext context=new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+
+    private EmployeeMapper employeeMapper = context.getBean("employeeMapper", EmployeeMapper.class);
 
 
     @Test
@@ -70,6 +76,21 @@ public class Test01 {
         for (Employee employee1 : employees) {
             System.out.println(employee1);
         }
+
+    }
+
+    @Test
+    public void test33(){
+
+        ApplicationContext context1=new AnnotationConfigApplicationContext("com.zhang.pm.config");
+        MybatisPlusConfig mybatisPlusConfig = context1.getBean("mybatisPlusConfig", MybatisPlusConfig.class);
+        MybatisPlusInterceptor mybatisPlusInterceptor = mybatisPlusConfig.mybatisPlusInterceptor();
+        System.out.println(mybatisPlusInterceptor);
+
+        Page<Employee> employeePage = employeeMapper.selectPage(new Page<Employee>(1, 4), new QueryWrapper<>());
+        System.out.println(employeePage.getRecords());
+        int delete = employeeMapper.delete(new QueryWrapper<>());
+        System.out.println(delete);
 
     }
 }
