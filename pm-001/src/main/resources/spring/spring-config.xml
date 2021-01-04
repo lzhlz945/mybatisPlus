@@ -77,7 +77,11 @@
                                 <property name="tablePrefix" value="tbl_"></property>
                                 <!--配置全局主键自增-->
                                 <property name="idType" value="AUTO"></property>
+
                         </bean>
                 </property>
         </bean>
+   <!--sqlInjector-->
+
+
 </beans>
