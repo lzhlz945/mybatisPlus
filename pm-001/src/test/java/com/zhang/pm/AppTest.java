@@ -165,4 +165,15 @@ public class AppTest {
         System.out.println(employeePage.getRecords());
     }
 
+    /**
+     * testPageInfo
+     */
+    @Test
+    public void testZXQ(){
+
+        int delete = employeeMapper.delete(new QueryWrapper<>());
+        System.out.println(delete);
+
+    }
+
 }

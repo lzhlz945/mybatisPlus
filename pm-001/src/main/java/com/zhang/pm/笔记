@@ -129,3 +129,16 @@
                         return target;
                     }
         ③：在pluginAll引入Interceptor俩遍历plugin，target = interceptor.plugin(target)来返回被代理的对象；
+
+
+ 10、分页插件和 Sql执行分析示例
+ <bean id="mybatisPlusInterceptor" class="com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor">
+                 <property name="interceptors">
+                         <list>
+                               sql分页
+                                 <ref bean="paginationInnerInterceptor"/>
+                                Sql执行分析示例
+                                 <ref bean="blockAttackInnerInterceptor"/>
+                         </list>
+                 </property>
+         </bean>
