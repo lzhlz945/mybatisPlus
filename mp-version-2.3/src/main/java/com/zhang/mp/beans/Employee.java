@@ -1,6 +1,7 @@
 package com.zhang.mp.beans;
 
 import com.baomidou.mybatisplus.annotations.*;
+import com.baomidou.mybatisplus.enums.FieldFill;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -26,6 +27,7 @@ public class Employee extends Model<Employee> {
     private Integer id;
     @TableField("last_name")
     private String lastName;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String email;
     private String gender;
     private Integer age;

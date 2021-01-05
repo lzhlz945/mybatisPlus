@@ -158,3 +158,9 @@
      	 	<property name="logicNotDeleteValue" value="1"></property>
   ③、加入字段：    @TableLogic
              private int logicFiled;
+
+
+13、字段填充：
+   1、自定义类继承MetaObjectHandler
+   2、字段填充：@TableField(fill = FieldFill.INSERT_UPDATE)
+   3、spring中装配进去，注册到全局配置中

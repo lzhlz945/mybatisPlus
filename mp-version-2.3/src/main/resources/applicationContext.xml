@@ -89,6 +89,9 @@
 		<property name="logicNotDeleteValue" value="1"/>
 		<!--逻辑删除-->
 		<property name="sqlInjector" ref="logicSqlInjector"/>
+
+		<!--字段填充-->
+		<property name="metaObjectHandler" ref="metaObjectHandler"/>
 	
 	</bean>
 	
@@ -107,4 +110,7 @@
 	
 	<!--配置自定义全局-->
 	<bean id="mySqlInjector" class="com.zhang.mp.injector.MySqlInjector"></bean>
+
+	<!--字段填充-->
+	<bean class="com.zhang.mp.handler.MyMetaObjectHandler" id="metaObjectHandler"></bean>
 </beans>
