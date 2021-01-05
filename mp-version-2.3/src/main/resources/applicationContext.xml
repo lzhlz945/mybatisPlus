@@ -82,7 +82,13 @@
 
 		<!--注册自定义全局配置-->
 
-		<property name="sqlInjector" ref="mySqlInjector"/>
+		<!--<property name="sqlInjector" ref="mySqlInjector"/>-->
+
+		<!--配置逻辑删除全局值-->
+		<property name="logicDeleteValue" value="-1"/>
+		<property name="logicNotDeleteValue" value="1"/>
+		<!--逻辑删除-->
+		<property name="sqlInjector" ref="logicSqlInjector"/>
 	
 	</bean>
 	
@@ -96,6 +102,8 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.zhang.mp.mapper"></property>
 	</bean>
+
+	<bean class="com.baomidou.mybatisplus.mapper.LogicSqlInjector" id="logicSqlInjector"></bean>
 	
 	<!--配置自定义全局-->
 	<bean id="mySqlInjector" class="com.zhang.mp.injector.MySqlInjector"></bean>

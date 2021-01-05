@@ -97,5 +97,15 @@ public class TestMP {
 
 
 	}
+
+	/**
+	 *逻辑删除测试
+	 */
+	@Test
+	public void testLjsc(){
+
+		Integer integer = employeeMapper.deleteById(130);
+		System.out.println(integer);
+	}
 		
 }

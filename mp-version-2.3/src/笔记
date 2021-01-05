@@ -149,3 +149,12 @@
    ②、在spring中注入自定义类，在交给globalConfiguration管理
    ③、在mapper中自定义方法
    ④、在自定义类中仿照AutoSqlInject中的方法写就行
+
+12、逻辑删除
+  ①、<bean class="com.baomidou.mybatisplus.mapper.LogicSqlInjector" id="logicSqlInjector"></bean>
+  ②、在全局中name="sqlInjector"中引入：
+     <!-- 注入逻辑删除全局值 -->
+     	 	<property name="logicDeleteValue" value = "-1"></property>
+     	 	<property name="logicNotDeleteValue" value="1"></property>
+  ③、加入字段：    @TableLogic
+             private int logicFiled;

@@ -1,12 +1,11 @@
 package com.zhang.mp.beans;
 
+import com.baomidou.mybatisplus.annotations.*;
 import com.baomidou.mybatisplus.enums.IdType;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.io.Serializable;
 
 /**
@@ -17,6 +16,7 @@ import java.io.Serializable;
  * @author zhl
  * @since 2021-01-04
  */
+
 @TableName("tbl_employee")
 public class Employee extends Model<Employee> {
 
@@ -30,7 +30,12 @@ public class Employee extends Model<Employee> {
     private String gender;
     private Integer age;
     private Integer version;
+    @TableLogic
+    private int logicFiled;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Integer getId() {
         return id;
@@ -80,20 +85,30 @@ public class Employee extends Model<Employee> {
         this.version = version;
     }
 
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
+    public int getLogicFiled() {
+        return logicFiled;
+    }
+
+    public void setLogicFiled(int logicFiled) {
+        this.logicFiled = logicFiled;
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-        ", id=" + id +
-        ", lastName=" + lastName +
-        ", email=" + email +
-        ", gender=" + gender +
-        ", age=" + age +
-        ", version=" + version +
-        "}";
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", version=" + version +
+                ", logicFiled=" + logicFiled +
+                '}';
     }
+
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
+
 }
