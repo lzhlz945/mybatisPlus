@@ -3,6 +3,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/pm-generator" />
     <file type="web" url="file://$PROJECT_DIR$/pm-generator-01" />
+    <type id="Spring" />
   </component>
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />

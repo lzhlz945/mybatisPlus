@@ -85,5 +85,17 @@ public class TestMP {
 		
 		
 	}
+
+	/**
+	 * 测试自定义全局配置
+	 *
+	 */
+	@Test
+	public void testZdy(){
+		int i = employeeMapper.deleteAll();
+		System.out.println(i);
+
+
+	}
 		
 }

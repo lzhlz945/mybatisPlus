@@ -49,9 +49,9 @@
 				<bean class="com.baomidou.mybatisplus.plugins.PaginationInterceptor"></bean>
 				
 				<!-- 注册执行分析插件 -->
-				<bean class="com.baomidou.mybatisplus.plugins.SqlExplainInterceptor">
+				<!--<bean class="com.baomidou.mybatisplus.plugins.SqlExplainInterceptor">
 					<property name="stopProceed" value="true"></property>
-				</bean>
+				</bean>-->
 				
 				<!-- 注册性能分析插件 -->
 				<bean class="com.baomidou.mybatisplus.plugins.PerformanceInterceptor">
@@ -79,6 +79,10 @@
 		
 		<!-- 全局的表前缀策略配置 -->
 		<property name="tablePrefix" value="tbl_"></property>
+
+		<!--注册自定义全局配置-->
+
+		<property name="sqlInjector" ref="mySqlInjector"/>
 	
 	</bean>
 	
@@ -93,5 +97,6 @@
 		<property name="basePackage" value="com.zhang.mp.mapper"></property>
 	</bean>
 	
-	
+	<!--配置自定义全局-->
+	<bean id="mySqlInjector" class="com.zhang.mp.injector.MySqlInjector"></bean>
 </beans>
