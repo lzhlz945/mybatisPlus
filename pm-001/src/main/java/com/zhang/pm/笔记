@@ -107,7 +107,7 @@
        四大对象的每个对象在创建时，都会执行 interceptorChain.pluginAll()，会经过每个插
        件对象的 plugin()方法，目的是为当前的四大对象创建代理。代理对象就可以拦截到四
        大对象相关方法的执行，因为要执行四大对象的方法需要经过代理.
-  在statementHandler的实现类中defaultHandler的构造方法中：
+  在statementHandler的实现类中BaseStatementHandler的构造方法中：
         ①：会创建：parameterHandler和resultHandler
         this.parameterHandler = this.configuration.newParameterHandler(mappedStatement, parameterObject, boundSql);
         this.resultSetHandler = this.configuration.newResultSetHandler(executor, mappedStatement, rowBounds, this.parameterHandler, resultHandler, boundSql);
